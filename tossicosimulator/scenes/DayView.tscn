@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1y2x3j4k5l6"]
+
+[ext_resource type="Script" path="res://scripts/DayView.gd" id="1_xyz12"]
+[ext_resource type="PackedScene" uid="uid://d1e2f3g4h5i6_plug_ui" path="res://ui/PlugInteraction.tscn" id="2_plginst"]
+
+[node name="DayView" type="Node2D" node_paths=PackedStringArray("actions_container", "plug_interaction_ui")]
+script = ExtResource("1_xyz12")
+actions_container = NodePath("ActionsContainer")
+plug_interaction_ui = NodePath("PlugInteractionUI_Instance")
+
+[node name="MoneyLabel" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 250.0
+offset_bottom = 43.0
+text = "Soldi: €"
+
+[node name="MentalHealthLabel" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 50.0
+offset_right = 250.0
+offset_bottom = 73.0
+text = "Salute Mentale: "
+
+[node name="TimeLabel" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 80.0
+offset_right = 300.0
+offset_bottom = 103.0
+text = "Tempo: Giorno - Fase - Ora"
+
+[node name="StateLabel" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 110.0
+offset_right = 250.0
+offset_bottom = 133.0
+text = "Stato: "
+
+[node name="LucidityLabel" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 140.0
+offset_right = 250.0
+offset_bottom = 163.0
+text = "Lucidità: "
+
+[node name="ActionsContainer" type="VBoxContainer" parent="."]
+offset_left = 20.0
+offset_top = 200.0
+offset_right = 170.0
+# offset_bottom tipicamente si adatta ai figli in VBoxContainer,
+# ma se serve un minimo, può essere impostato. Per ora lo lascio gestire automaticamente.
+# offset_bottom = 320.0
+theme_override_constants/separation = 10
+
+[node name="SleepButton" type="Button" parent="ActionsContainer"]
+layout_mode = 2
+text = "Dormi (8 ore)"
+
+[node name="WorkButton" type="Button" parent="ActionsContainer"]
+layout_mode = 2
+text = "Lavora (4 ore)"
+
+[node name="GoToPlugButton" type="Button" parent="ActionsContainer"]
+layout_mode = 2
+text = "Vai dal Plug"
+
+[node name="PlugInteractionUI_Instance" parent="." instance=ExtResource("2_plginst")]
+visible = false # Assicuriamoci che sia nascosto inizialmente, anche se lo script figlio lo fa
+
+[connection signal="pressed" from="ActionsContainer/SleepButton" to="." method="_on_sleep_button_pressed"]
+[connection signal="pressed" from="ActionsContainer/WorkButton" to="." method="_on_work_button_pressed"]
+[connection signal="pressed" from="ActionsContainer/GoToPlugButton" to="." method="_on_go_to_plug_button_pressed"]
