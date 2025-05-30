@@ -1,0 +1,84 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1e2f3g4h5i6_plug_ui"]
+
+[ext_resource type="Script" path="res://ui/PlugInteraction.gd" id="1_plgscr"]
+
+[node name="PlugInteractionUI" type="PanelContainer" node_paths=PackedStringArray("quality_option_button", "quantity_spin_box", "cost_label", "buy_button", "exit_button")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_plgscr")
+quality_option_button = NodePath("MainVBox/QualityBox/QualityOptionButton")
+quantity_spin_box = NodePath("MainVBox/QuantityBox/QuantitySpinBox")
+cost_label = NodePath("MainVBox/CostLabel")
+buy_button = NodePath("MainVBox/ButtonsBox/BuyButton")
+exit_button = NodePath("MainVBox/ButtonsBox/ExitButton")
+# Per rendere visibile il PanelContainer, aggiungi uno StyleBoxFlat tramite l'inspector:
+# Theme Overrides -> Styles -> Panel -> New StyleBoxFlat -> Bg Color (scegli un colore)
+
+[node name="MainVBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="TitleLabel" type="Label" parent="MainVBox"]
+layout_mode = 2
+text = "Dal Tuo Plug di Fiducia"
+horizontal_alignment = 1 # HORIZONTAL_ALIGNMENT_CENTER
+
+[node name="HSeparator" type="HSeparator" parent="MainVBox"]
+layout_mode = 2
+
+[node name="QualityBox" type="HBoxContainer" parent="MainVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainVBox/QualityBox"]
+layout_mode = 2
+text = "Qualità:"
+
+[node name="QualityOptionButton" type="OptionButton" parent="MainVBox/QualityBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(150, 0)
+# Le opzioni verranno popolate da script
+
+[node name="QuantityBox" type="HBoxContainer" parent="MainVBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainVBox/QuantityBox"]
+layout_mode = 2
+text = "Quantità (g):"
+
+[node name="QuantitySpinBox" type="SpinBox" parent="MainVBox/QuantityBox"]
+layout_mode = 2
+min_value = 0.1
+max_value = 5.0
+step = 0.1
+value = 0.2 # Valore di default indicativo
+custom_minimum_size = Vector2(80, 0)
+
+[node name="CostLabel" type="Label" parent="MainVBox"]
+layout_mode = 2
+text = "Costo: € --"
+horizontal_alignment = 1 # HORIZONTAL_ALIGNMENT_CENTER
+
+[node name="HSeparator2" type="HSeparator" parent="MainVBox"] # Rinominato per unicità se necessario
+layout_mode = 2
+
+[node name="ButtonsBox" type="HBoxContainer" parent="MainVBox"]
+layout_mode = 2
+alignment = 1 # ALIGNMENT_CENTER (Godot 4 uses 1 for center in HBoxContainer)
+theme_override_constants/separation = 20
+
+[node name="BuyButton" type="Button" parent="MainVBox/ButtonsBox"]
+layout_mode = 2
+text = "Compra"
+
+[node name="ExitButton" type="Button" parent="MainVBox/ButtonsBox"]
+layout_mode = 2
+text = "Esci"
